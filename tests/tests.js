@@ -1,3 +1,5 @@
+"use strict";
+
 let assert = require('chai').assert;
 let {matchArray, matchValue, matchDict, zipLongest, match, _, HEAD, TAIL, REST,} = require('../lib/pampy');
 let {PAD_VALUE, STRING, NUMBER} = require('../lib/pampy');
