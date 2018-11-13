@@ -1,10 +1,16 @@
 {
+  "name": "pampy.js",
+  "description": "Pattern Matching library for functional programming in JavaScript",
   "author": {
     "name": "Claudio Santini",
     "email": "hireclaudio@gmail.com ",
     "url": "https://www.linkedin.com/in/santinic"
   },
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/santinic/pampy.js"
+  },
   "dependencies": {
   },
   "devDependencies": {
@@ -20,5 +26,18 @@
   },
   "engines": {
     "node": ">=6.0.0"
-  }
+  },
+  "keywords": [
+    "pattern matching",
+    "pattern",
+    "functional programming",
+    "functional",
+    "match",
+    "lisp",
+    "fibonacci",
+    "recursive",
+    "recursion",
+    "haskell",
+    "scala"
+  ]
 }
