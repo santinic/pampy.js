@@ -6,6 +6,5 @@ node_js:
   - "9"
   - "10"
 sudo: false
-#install: npm install
 script: npm run test
 #after_script: "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"

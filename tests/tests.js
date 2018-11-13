@@ -1,7 +1,8 @@
 "use strict";
 
 let assert = require('chai').assert;
-let {matchArray, matchValue, matchDict, zipLongest, match, _, HEAD, TAIL, REST,} = require('../lib/pampy');
+let fs = require('fs');
+let {matchArray, matchValue, matchDict, zipLongest, match, matchAll, _, HEAD, TAIL, REST,} = require('../lib/pampy');
 let {PAD_VALUE, STRING, NUMBER} = require('../lib/pampy');
 
 
@@ -57,7 +58,7 @@ describe('matchDict', () => {
     });
     it('ambiguous double _', () => {
         assert.deepEqual(matchDict({a: _, _: _}, {a: 1, b: 2}), [true, [1, 'b', 2]]);
-        // assert.deepEqual(matchDict({a: STRING, _: _}, {a: 1, b: 2}), [true, [1, 'b', 2]]);
+        assert.deepEqual(matchDict({a: STRING, _: _}, {a: "1", b: 2}), [true, ["1", 'b', 2]]);
     });
 });
 describe('match', () => {
@@ -101,5 +102,40 @@ describe('match', () => {
         assert.equal(lisp([plus, 1, 2]), 3);
         assert.equal(lisp([plus, 1, [minus, 4, 2]]), 3);
         assert.equal(lisp([reduce, plus, [1, 2, 3]]), 6);
+    });
+    it('len', () => {
+        function len(l) {
+            return match(l,
+                [],         0,
+                [_, TAIL],  (head, tail) => 1 + len(tail)
+            )
+        }
+        assert.equal(len([{}]), 1);
+        assert.equal(len([5]), 1);
+        assert.equal(len(["1",2,3]), 3);
+        assert.equal(len([]), 0);
+        assert.equal(len(new Array(100)), 100);
+    });
+
+});
+describe('matchAll', () => {
+    it('basic', () => {
+        let rows = [
+            {a:1, b:2},
+            {a:3, b:4},
+            {a:5, b:6}
+        ];
+        assert.deepEqual(matchAll(rows, {a:_, b:_}, (a, b) => [a, b]),  [[1,2],[3,4],[5,6]]);
+        assert.deepEqual(matchAll(rows, {a:_, _:_}, (x1, x2, x3) => [x1, x2, x3]),  [[1,"b",2],[3,"b",4],[5,"b",6]]);
+    });
+    it('Big json', () => {
+        let bigJson = JSON.parse(fs.readFileSync("./tests/proggit.json"));
+
+        let res = matchAll(bigJson.data.children, {_: {score: _}}, (key, x) => x);
+        assert.equal(res.length, bigJson.data.children.length);
+
+        let avgMatch = res.reduce((a,b) => a + b) / res.length;
+        let avg = bigJson.data.children.map(c => c.data.score).reduce((a,b) => a + b) / bigJson.data.children.length;
+        assert.equal(avgMatch, avg);
     });
 });
