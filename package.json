@@ -1,4 +1,10 @@
 {
+  "author": {
+    "name": "Claudio Santini",
+    "email": "hireclaudio@gmail.com ",
+    "url": "https://www.linkedin.com/in/santinic"
+  },
+  "license": "MIT",
   "dependencies": {
   },
   "devDependencies": {
@@ -11,5 +17,8 @@
   "scripts": {
     "test": "mocha tests",
     "coveralls": "coveralls"
+  },
+  "engines": {
+    "node": ">=6.0.0"
   }
 }
