@@ -2,6 +2,7 @@
   "version": "0.0.1",
   "name": "pampy",
   "main": "lib/pampy.js",
+  "homepage": "https://github.com/santinic/pampy.js",
   "description": "Pattern Matching library for functional programming in JavaScript",
   "author": {
     "name": "Claudio Santini",
