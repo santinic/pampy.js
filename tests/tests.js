@@ -1,9 +1,10 @@
 "use strict";
 
 let assert = require('chai').assert;
+let lodash = require('lodash');
 let fs = require('fs');
 let {matchArray, matchValue, matchDict, zipLongest, match, matchAll, _, HEAD, TAIL, REST,} = require('../lib/pampy');
-let {PAD_VALUE, STRING, NUMBER} = require('../lib/pampy');
+let {PAD_VALUE, STRING, NUMBER, ANY} = require('../lib/pampy');
 
 
 describe('matchValue', () => {
@@ -107,7 +108,7 @@ describe('match', () => {
         function len(l) {
             return match(l,
                 [],         0,
-                [_, TAIL],  (head, tail) => 1 + len(tail)
+                [ANY, TAIL],  (head, tail) => 1 + len(tail)
             )
         }
         assert.equal(len([{}]), 1);
@@ -116,6 +117,29 @@ describe('match', () => {
         assert.equal(len([]), 0);
         assert.equal(len(new Array(100)), 100);
     });
+    it('tree leafs', () => {
+        function findLeafs(node) {
+            return match(node.childs,
+                [],         () => node.name,
+                [TAIL],     (tail) => lodash.flatMap(tail, findLeafs)
+            );
+        }
+
+        let tree = {
+            name: 1,
+            childs: [
+                {
+                    name: 2,
+                    childs: [
+                        {name: 3, childs: []},
+                        {name: 4, childs: []}
+                    ]
+                },
+                {name:5, childs: []}
+            ]
+        };
+        assert.deepEqual(findLeafs(tree), [3, 4, 5]);
+    })
 
 });
 describe('matchAll', () => {

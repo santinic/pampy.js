@@ -1,5 +1,7 @@
 {
-  "name": "pampy.js",
+  "version": "0.0.1",
+  "name": "pampy",
+  "main": "lib/pampy.js",
   "description": "Pattern Matching library for functional programming in JavaScript",
   "author": {
     "name": "Claudio Santini",
@@ -11,8 +13,7 @@
     "type": "git",
     "url": "git://github.com/santinic/pampy.js"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "chai": "^4.2.0",
     "coveralls": "^3.0.2",
