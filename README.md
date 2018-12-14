@@ -42,19 +42,19 @@ let {match, REST, _} = require("pampy");
 
 function lisp(exp) {
     return match(exp,
-        Function, 			    (x) => x,
-        [Function, REST], 	(f, rest) => f.apply(null, rest.map(lisp)),
-        Array, 				      (l) => l.map(lisp),
-        _, 					        (x) => x
+        Function,           (x) => x,
+        [Function, REST],   (f, rest) => f.apply(null, rest.map(lisp)),
+        Array,              (l) => l.map(lisp),
+        _,                  (x) => x
     );
 
 let plus = (a, b) => a + b;
 let minus = (a, b) => a - b;
 let reduce = (f, l) => l.reduce(f);
 
-lisp([plus, 1, 2]);						      # => 3
-lisp([plus, 1, [minus, 4, 2]]); 		# => 3
-lisp([reduce, plus, [1, 2, 3]]); 		# => 6
+lisp([plus, 1, 2]);                 # => 3
+lisp([plus, 1, [minus, 4, 2]]);     # => 3
+lisp([reduce, plus, [1, 2, 3]]);    # => 6
 ```
 
 ## You can match so many things!
@@ -63,17 +63,17 @@ lisp([reduce, plus, [1, 2, 3]]); 		# => 6
 let {match, _, NUMBER, STRING} = require("pampy");
 
 match(x,
-    3,              	"this matches the number 3",
+    3,                "this matches the number 3",
 
     NUMBER,           "matches any javascript number",
 
-    [STRING, NUMBER],	[a, b] => "a typed list [a, b] that you can use in a function",
+    [STRING, NUMBER], [a, b] => "a typed list [a, b] that you can use in a function",
 
-    [1, 2, _],      	"any list of 3 elements that begins with [1, 2]",
+    [1, 2, _],        "any list of 3 elements that begins with [1, 2]",
 
-    {x: _},       		"any dict with a key 'x' and any value associated",
+    {x: _},           "any dict with a key 'x' and any value associated",
 
-    _,              	"anything else"
+    _,                "anything else"
 )
 ```
 
@@ -86,7 +86,7 @@ x = [1, 2, 3];
 
 match(x, [1, TAIL],   (t) => t);            # => [2, 3]
 
-match(x, [_, TAIL],  	(h, t) => [h, t]);    # => [1, [2, 3])
+match(x, [_, TAIL],   (h, t) => [h, t]);    # => [1, [2, 3])
 
 ```
 
