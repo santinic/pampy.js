@@ -119,8 +119,8 @@ Admittedly using `_` as key is a bit of a trick, but it works for most situation
 | Pattern Example | What it means | Matched Example |  Arguments Passed to function | NOT Matched Example |
 | --------------- | --------------| --------------- | ----------------------------- | ------------------ |
 | `"hello"` |  only the string `"hello"` matches | `"hello"` | nothing | any other value |
-| `NUMBER` | Any float number | `2.35` | `2.35` | any other value |
-| `STRING` | Any string | `"hello"` | `"hello"` | any other value |
+| `NUMBER` | Any javascript number | `2.35` | `2.35` | any other value |
+| `STRING` | Any javascript string | `"hello"` | `"hello"` | any other value |
 | `Array` | Any array object | `[1, 2]` | `[1, 2]` | any other value |
 | `_` | Any object |  | that value | |
 | `ANY` | The same as `_` | | that value | |
