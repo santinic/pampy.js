@@ -15,7 +15,9 @@
     "url": "git://github.com/santinic/pampy.js"
   },
   "files": [
-    "/lib"
+    "/lib",
+    "LICENSE",
+    "README.md"
   ],
   "dependencies": {},
   "devDependencies": {
