@@ -4,6 +4,7 @@
 [![License MIT](https://go-shields.herokuapp.com/license-MIT-blue.png)]()
 [![Travis-CI Status](https://api.travis-ci.org/santinic/pampy.js.svg?branch=master)](https://travis-ci.org/santinic/pampy.js)
 [![Coverage Status](https://coveralls.io/repos/github/santinic/pampy.js/badge.svg?branch=master)](https://coveralls.io/github/santinic/pampy.js?branch=master)
+[![npm version](https://badge.fury.io/js/pampy.svg)](https://badge.fury.io/js/pampy)
 
 
 Pampy.js is pretty small (150 lines), reasonably fast, and often makes your code more readable, and easier to reason about. There is also a [Python version](https://github.com/santinic/pampy) of Pampy.
