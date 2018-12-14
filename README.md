@@ -122,7 +122,6 @@ Admittedly using `_` as key is a bit of a trick, but it works for most situation
 | `NUMBER` | Any float number | `2.35` | `2.35` | any other value |
 | `STRING` | Any string | `"hello"` | `"hello"` | any other value |
 | `Array` | Any array object | `[1, 2]` | `[1, 2]` | any other value |
-| `MyClass` | Any instance of MyClass. **And any object that extends MyClass.** | `new MyClass()` | that instance | any other object |
 | `_` | Any object |  | that value | |
 | `ANY` | The same as `_` | | that value | |
 | `[1, 2, _]`  | A list that starts with 1, 2 and ends with any value | `[1, 2, 3]` | `3` | `[1, 2, 3, 4]` |
