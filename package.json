@@ -29,7 +29,7 @@
   },
   "scripts": {
     "test": "mocha tests",
-    "coveralls": "coveralls"
+    "coveralls": "node_modules/nyc/bin/nyc.js npm test | coveralls"
   },
   "engines": {
     "node": ">=6.0.0"
