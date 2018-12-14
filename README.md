@@ -42,17 +42,17 @@ let {match, REST, _} = require("pampy");
 
 function lisp(exp) {
     return match(exp,
-        Function, 			(x) => x,
+        Function, 			    (x) => x,
         [Function, REST], 	(f, rest) => f.apply(null, rest.map(lisp)),
-        Array, 				(l) => l.map(lisp),
-        _, 					(x) => x
+        Array, 				      (l) => l.map(lisp),
+        _, 					        (x) => x
     );
 
 let plus = (a, b) => a + b;
 let minus = (a, b) => a - b;
 let reduce = (f, l) => l.reduce(f);
 
-lisp([plus, 1, 2]);						# => 3
+lisp([plus, 1, 2]);						      # => 3
 lisp([plus, 1, [minus, 4, 2]]); 		# => 3
 lisp([reduce, plus, [1, 2, 3]]); 		# => 6
 ```
@@ -65,7 +65,7 @@ let {match, _, NUMBER, STRING} = require("pampy");
 match(x,
     3,              	"this matches the number 3",
 
-    NUMBER,            	"matches any javascript number",
+    NUMBER,           "matches any javascript number",
 
     [STRING, NUMBER],	[a, b] => "a typed list [a, b] that you can use in a function",
 
@@ -84,7 +84,7 @@ let {match, _, TAIL} = require("pampy");
 
 x = [1, 2, 3];
 
-match(x, [1, TAIL],    	(t) => t);            # => [2, 3]
+match(x, [1, TAIL],   (t) => t);            # => [2, 3]
 
 match(x, [_, TAIL],  	(h, t) => [h, t]);    # => [1, [2, 3])
 
@@ -110,31 +110,25 @@ match(pet, {details: {age: _}}, (age) => age);        # => 3
 
 match(pet, {_: {age: _}}, (a, b) => [a, b]);          # => ['details', 3]
 ```
+Admittedly using `_` as key is a bit of a trick, but it works for most situations.
 
 ## All the things you can match
 
 | Pattern Example | What it means | Matched Example |  Arguments Passed to function | NOT Matched Example |
 | --------------- | --------------| --------------- | ----------------------------- | ------------------ |
 | `"hello"` |  only the string `"hello"` matches | `"hello"` | nothing | any other value |
-| `None` | only `None` | `None` | nothing | any other value |
-| `int` | Any integer | `42` | `42` | any other value |
-| `float` | Any float number | `2.35` | `2.35` | any other value |
-| `str` | Any string | `"hello"` | `"hello"` | any other value |
-| `tuple` | Any tuple | `(1, 2)` | `(1, 2)` | any other value |
-| `list` | Any list | `[1, 2]` | `[1, 2]` | any other value |
+| `NUMBER` | Any float number | `2.35` | `2.35` | any other value |
+| `STRING` | Any string | `"hello"` | `"hello"` | any other value |
+| `Array` | Any array object | `[1, 2]` | `[1, 2]` | any other value |
 | `MyClass` | Any instance of MyClass. **And any object that extends MyClass.** | `MyClass()` | that instance | any other object |
-| `_` | Any object (even None) |  | that value | |
+| `_` | Any object |  | that value | |
 | `ANY` | The same as `_` | | that value | |
-| `(int, int)` | A tuple made of any two integers | `(1, 2)` | `1` and `2` | (True, False) |
 | `[1, 2, _]`  | A list that starts with 1, 2 and ends with any value | `[1, 2, 3]` | `3` | `[1, 2, 3, 4]` |
 | `[1, 2, TAIL]` | A list that start with 1, 2 and ends with any sequence | `[1, 2, 3, 4]`| `[3, 4]` | `[1, 7, 7, 7]` |
-| `{'type':'dog', age: _ }` | Any dict with `type: "dog"` and with an age | `{"type":"dog", "age": 3}` | `3` | `{"type":"cat", "age":2}` |
-| `{'type':'dog', age: int }` | Any dict with `type: "dog"` and with an `int` age | `{"type":"dog", "age": 3}` | `3` | `{"type":"dog", "age":2.3}` |
-| `re.compile('(\w+)-(\w+)-cat$')` | Any string that matches that regular expression expr | `"my-fuffy-cat"` | `"my"` and `"puffy"` | `"fuffy-dog"` | 
+| `{type:'dog', age: _ }` | Any dict with `type: "dog"` and with an age | `{"type":"dog", "age": 3}` | `3` | `{"type":"cat", "age":2}` |
+| `{type:'dog', age: NUMBER }` | Any dict with `type: "dog"` and with an numeric age | `{type:"dog", age: 3}` | `3` | `{type:"dog", age:2.3}` |
+| `null` | only `null` | `null` | nothing | any other value |
+| `undefined` | only `undefined` | `undefined` | nothing | any other value |
 
-
-## Install
-```npm i pampy```
-
-
-<!--We could port it also to Python 2 but we'd need to change the dict matching syntax.-->
+## How to install
+```npm install pampy```
