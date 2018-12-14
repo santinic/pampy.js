@@ -4,7 +4,7 @@ let assert = require('chai').assert;
 let lodash = require('lodash');
 let fs = require('fs');
 let {matchArray, matchValue, matchDict, zipLongest, match, matchAll, _, HEAD, TAIL, REST,} = require('../lib/pampy');
-let {PAD_VALUE, STRING, NUMBER, ANY} = require('../lib/pampy');
+let {PAD_VALUE, STRING, NUMBER, ANY, MatchError} = require('../lib/pampy');
 
 
 describe('matchValue', () => {
@@ -63,6 +63,16 @@ describe('matchDict', () => {
     });
 });
 describe('match', () => {
+    it('bad args num', () => {
+        assert.throws(() => match(3, 2), MatchError);
+        assert.throws(() => match(4, 3, 4, 5), MatchError);
+    });
+    it('TAIL/REST position', () => {
+        assert.throws(() => match([1,2,3] [TAIL, 1], 1), MatchError);
+    });
+    it('ignored case', () => {
+        assert.throws(() => match(3, STRING, "ok"), MatchError);
+    });
     it('lambda args', () => {
         assert.equal(match(3, NUMBER, (x) => x), 3);
         assert.equal(match([1, 2], [1, _], (x) => x), 2);
