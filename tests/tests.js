@@ -74,6 +74,20 @@ describe('match', () => {
         assert.deepEqual(match([1, 2, 3, 4], [1, _, TAIL], (a, b) => [a, b]), [2, [3, 4]]);
 
     });
+    it('lambda cond', () => {
+        function f(x) {
+            return match(x,
+                STRING,         (x => `${x} is a string`),
+                x => x > 3,     x => `${x} is > 3`,
+                x => x < 3,     x => `${x} is < 3`,
+                x => x === 3,   x => `${x} is = 3`);
+        }
+        assert.equal(f(3), "3 is = 3");
+        assert.equal(f(2), "2 is < 3");
+        assert.equal(f(4), "4 is > 3");
+        assert.equal(f("hello"), "hello is a string");
+        assert.equal(f("3"), "3 is a string");
+    });
     it('fibonacci', () => {
         function fib(n) {
             return match(n,
@@ -108,7 +122,7 @@ describe('match', () => {
         function len(l) {
             return match(l,
                 [],         0,
-                [ANY, TAIL],  (head, tail) => 1 + len(tail)
+                [_, TAIL],  (head, tail) => 1 + len(tail)
             )
         }
         assert.equal(len([{}]), 1);
