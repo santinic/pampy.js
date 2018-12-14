@@ -52,9 +52,9 @@ let plus = (a, b) => a + b;
 let minus = (a, b) => a - b;
 let reduce = (f, l) => l.reduce(f);
 
-lisp([plus, 1, 2]);                 # => 3
-lisp([plus, 1, [minus, 4, 2]]);     # => 3
-lisp([reduce, plus, [1, 2, 3]]);    # => 6
+lisp([plus, 1, 2]);                 // => 3
+lisp([plus, 1, [minus, 4, 2]]);     // => 3
+lisp([reduce, plus, [1, 2, 3]]);    // => 6
 ```
 
 ## You can match so many things!
@@ -84,9 +84,9 @@ let {match, _, TAIL} = require("pampy");
 
 x = [1, 2, 3];
 
-match(x, [1, TAIL],   (t) => t);            # => [2, 3]
+match(x, [1, TAIL],   (t) => t);            // => [2, 3]
 
-match(x, [_, TAIL],   (h, t) => [h, t]);    # => [1, [2, 3])
+match(x, [_, TAIL],   (h, t) => [h, t]);    // => [1, [2, 3])
 
 ```
 
@@ -97,7 +97,7 @@ let {match, _, TAIL} = require("pampy");
 
 x = [1, [2, 3], 4];
 
-match(x, [1, [_, 3], _], (a, b) => [1, [a, 3], b]);   # => [1, [2, 3], 4]
+match(x, [1, [_, 3], _], (a, b) => [1, [a, 3], b]);   // => [1, [2, 3], 4]
 ```
 
 ## You can nest dicts. And you can use _ as key!
@@ -106,9 +106,9 @@ match(x, [1, [_, 3], _], (a, b) => [1, [a, 3], b]);   # => [1, [2, 3], 4]
 
 pet = { type: 'dog', details: { age: 3 } };
 
-match(pet, {details: {age: _}}, (age) => age);        # => 3
+match(pet, {details: {age: _}}, (age) => age);        // => 3
 
-match(pet, {_: {age: _}}, (a, b) => [a, b]);          # => ['details', 3]
+match(pet, {_: {age: _}}, (a, b) => [a, b]);          // => ['details', 3]
 ```
 Admittedly using `_` as key is a bit of a trick, but it works for most situations.
 
