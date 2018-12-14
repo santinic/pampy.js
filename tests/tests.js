@@ -153,8 +153,20 @@ describe('match', () => {
             ]
         };
         assert.deepEqual(findLeafs(tree), [3, 4, 5]);
-    })
-
+    });
+    it('match null and undefined', () => {
+        function f(x) {
+            return match(x,
+                null,       "null",
+                undefined,  "undefined",
+                NUMBER,     "number");
+        }
+        assert.equal(f(3), "number");
+        assert.equal(f(null), "null");
+        let z;
+        assert.equal(f(z), "undefined");
+        assert.equal(f(undefined), "undefined");
+    });
 });
 describe('matchAll', () => {
     it('basic', () => {
