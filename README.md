@@ -67,7 +67,7 @@ match(x,
 
     NUMBER,           "matches any javascript number",
 
-    [STRING, NUMBER], [a, b] => "a typed list [a, b] that you can use in a function",
+    [STRING, NUMBER], (a, b) => "a typed list [a, b] that you can use in a function",
 
     [1, 2, _],        "any list of 3 elements that begins with [1, 2]",
 
