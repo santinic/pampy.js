@@ -114,6 +114,22 @@ match(pet, {_: {age: _}}, (a, b) => [a, b]);          // => ['details', 3]
 ```
 Admittedly using `_` as key is a bit of a trick, but it works for most situations.
 
+## You can pass [pattern, action] array pairs to matchPairs for better Prettier formatting!
+
+```javascript
+function fib(n) {
+    return matchPairs(
+      n,
+      [0, 0],
+      [1, 1],
+      [2, 1],
+      [3, 2],
+      [4, 3],
+      [_, x => fib(x - 1) + fib(x - 2)]
+    )
+  }
+```
+
 ## All the things you can match
 
 | Pattern Example | What it means | Matched Example |  Arguments Passed to function | NOT Matched Example |
