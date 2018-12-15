@@ -1,3 +1,3 @@
 "use strict";
 
-module.exports = require('./lib/pampy');
+module.exports = require("./lib/pampy");

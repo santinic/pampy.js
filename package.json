@@ -23,9 +23,12 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "coveralls": "^3.0.2",
+    "husky": "^1.2.1",
     "mocha": "^5.2.0",
     "mocha-lcov-reporter": "^1.3.0",
-    "nyc": "^13.1.0"
+    "nyc": "^13.1.0",
+    "precise-commits": "^1.0.2",
+    "prettier": "^1.15.3"
   },
   "scripts": {
     "test": "mocha tests",
@@ -47,5 +50,10 @@
     "recursion",
     "haskell",
     "scala"
-  ]
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "precise-commits --check-only"
+    }
+  }
 }
