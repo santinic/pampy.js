@@ -114,6 +114,15 @@ match(pet, {_: {age: _}}, (a, b) => [a, b]);          // => ['details', 3]
 ```
 Admittedly using `_` as key is a bit of a trick, but it works for most situations.
 
+## You can use functions as patterns
+```javascript 
+match(x,
+  x => x > 3,     x => `${x} is > 3`,
+  x => x < 3,     x => `${x} is < 3`,
+  x => x === 3,   x => `${x} is = 3`
+)
+```
+
 ## All the things you can match
 
 | Pattern Example | What it means | Matched Example |  Arguments Passed to function | NOT Matched Example |
