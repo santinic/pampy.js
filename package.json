@@ -29,6 +29,7 @@
   },
   "scripts": {
     "test": "mocha tests",
+    "coverage": "node_modules/nyc/bin/nyc.js report npm test",
     "coveralls": "node_modules/nyc/bin/nyc.js report --reporter=text-lcov npm test | coveralls"
   },
   "engines": {
