@@ -137,7 +137,7 @@ function fib(n) {
       [_, x => fib(x - 1) + fib(x - 2)]
     )
   }
-
+```
 
 ## All the things you can match
 
