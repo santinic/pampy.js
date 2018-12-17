@@ -49,7 +49,7 @@ function lisp(exp) {
         Array,              (l) => l.map(lisp),
         _,                  (x) => x
     );
-
+}
 let plus = (a, b) => a + b;
 let minus = (a, b) => a - b;
 let reduce = (f, l) => l.reduce(f);
@@ -62,14 +62,14 @@ lisp([reduce, plus, [1, 2, 3]]);    // => 6
 ## You can match so many things!
 
 ```javascript
-let {match, _, NUMBER, STRING} = require("pampy");
+let {match, _} = require("pampy");
 
 match(x,
     3,                "this matches the number 3",
 
-    NUMBER,           "matches any javascript number",
+    Number,           "matches any javascript number",
 
-    [STRING, NUMBER], (a, b) => "a typed list [a, b] that you can use in a function",
+    [String, Number], (a, b) => "a typed list [a, b] that you can use in a function",
 
     [1, 2, _],        "any list of 3 elements that begins with [1, 2]",
 
@@ -114,7 +114,16 @@ match(pet, {_: {age: _}}, (a, b) => [a, b]);          // => ['details', 3]
 ```
 Admittedly using `_` as key is a bit of a trick, but it works for most situations.
 
-## You can pass [pattern, action] array pairs to matchPairs for better Prettier formatting!
+## You can use functions as patterns
+```javascript 
+match(x,
+  x => x > 3,     x => `${x} is > 3`,
+  x => x < 3,     x => `${x} is < 3`,
+  x => x === 3,   x => `${x} is = 3`
+)
+```
+
+## You can pass [pattern, action] array pairs to matchPairs for better Prettier formatting.
 
 ```javascript
 function fib(n) {
@@ -128,22 +137,23 @@ function fib(n) {
       [_, x => fib(x - 1) + fib(x - 2)]
     )
   }
-```
+
 
 ## All the things you can match
 
 | Pattern Example | What it means | Matched Example |  Arguments Passed to function | NOT Matched Example |
 | --------------- | --------------| --------------- | ----------------------------- | ------------------ |
 | `"hello"` |  only the string `"hello"` matches | `"hello"` | nothing | any other value |
-| `NUMBER` | Any javascript number | `2.35` | `2.35` | any other value |
-| `STRING` | Any javascript string | `"hello"` | `"hello"` | any other value |
+| `Number` | Any javascript number | `2.35` | `2.35` | any other value |
+| `String` | Any javascript string | `"hello"` | `"hello"` | any other value |
 | `Array` | Any array object | `[1, 2]` | `[1, 2]` | any other value |
 | `_` | Any object |  | that value | |
 | `ANY` | The same as `_` | | that value | |
 | `[1, 2, _]`  | A list that starts with 1, 2 and ends with any value | `[1, 2, 3]` | `3` | `[1, 2, 3, 4]` |
 | `[1, 2, TAIL]` | A list that start with 1, 2 and ends with any sequence | `[1, 2, 3, 4]`| `[3, 4]` | `[1, 7, 7, 7]` |
 | `{type:'dog', age: _ }` | Any dict with `type: "dog"` and with an age | `{type:"dog", age: 3}` | `3` | `{type:"cat", age:2}` |
-| `{type:'dog', age: NUMBER }` | Any dict with `type: "dog"` and with an numeric age | `{type:"dog", age: 3}` | `3` | `{type:"dog", age:2.3}` |
+| `{type:'dog', age: Number }` | Any dict with `type: "dog"` and with an numeric age | `{type:"dog", age: 3}` | `3` | `{type:"dog", age:2.3}` |
+| `x => x > 3` | Anything greather than 3 | `5` | `3` | `2` |
 | `null` | only `null` | `null` | nothing | any other value |
 | `undefined` | only `undefined` | `undefined` | nothing | any other value |
 

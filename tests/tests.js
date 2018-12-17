@@ -4,8 +4,7 @@ let assert = require('chai').assert;
 let lodash = require('lodash');
 let fs = require('fs');
 let {matchArray, matchValue, matchDict, zipLongest, match, matchAll, matchPairs, _, HEAD, TAIL, REST,} = require('../lib/pampy');
-let {PAD_VALUE, STRING, NUMBER, ANY, MatchError} = require('../lib/pampy');
-
+let {PAD_VALUE, ANY, MatchError} = require('../lib/pampy');
 
 describe('matchValue', () => {
     it('values', () => {
@@ -19,10 +18,10 @@ describe('matchValue', () => {
         assert.deepEqual(matchValue(_, 1), [true, [1]])
     });
     it('types', () => {
-        assert.deepEqual(matchValue(STRING, "ok"), [true, ["ok"]]);
-        assert.deepEqual(matchValue(STRING, 3), [false, []]);
-        assert.deepEqual(matchValue(NUMBER, 3), [true, [3]]);
-        assert.deepEqual(matchValue(NUMBER, "ok"), [false, []]);
+        assert.deepEqual(matchValue(String, "ok"), [true, ["ok"]]);
+        assert.deepEqual(matchValue(String, 3), [false, []]);
+        assert.deepEqual(matchValue(Number, 3), [true, [3]]);
+        assert.deepEqual(matchValue(Number, "ok"), [false, []]);
     });
 });
 describe('matchArray', () => {
@@ -39,8 +38,8 @@ describe('matchArray', () => {
         assert.deepEqual(matchArray([1, _, _], [1, 2, 3]), [true, [2, 3]]);
         assert.deepEqual(matchArray([1, _, 3], [1, 2, 3]), [true, [2]]);
 
-        assert.deepEqual(matchArray([1, NUMBER, 3], [1, 2, 3]), [true, [2]]);
-        assert.deepEqual(matchArray([1, STRING, NUMBER], [1, "2", 3]), [true, ["2", 3]]);
+        assert.deepEqual(matchArray([1, Number, 3], [1, 2, 3]), [true, [2]]);
+        assert.deepEqual(matchArray([1, String, Number], [1, "2", 3]), [true, ["2", 3]]);
     });
     it('nested', () => {
         assert.deepEqual(matchArray([1, [_, 3], _], [1, [2, 3], 4]), [true, [2, 4]])
@@ -59,7 +58,7 @@ describe('matchDict', () => {
     });
     it('ambiguous double _', () => {
         assert.deepEqual(matchDict({a: _, _: _}, {a: 1, b: 2}), [true, [1, 'b', 2]]);
-        assert.deepEqual(matchDict({a: STRING, _: _}, {a: "1", b: 2}), [true, ["1", 'b', 2]]);
+        assert.deepEqual(matchDict({a: String, _: _}, {a: "1", b: 2}), [true, ["1", 'b', 2]]);
     });
 });
 
@@ -83,10 +82,10 @@ describe('match', () => {
         assert.throws(() => match([1,2,3] [TAIL, 1], 1), MatchError);
     });
     it('ignored case', () => {
-        assert.throws(() => match(3, STRING, "ok"), MatchError);
+        assert.throws(() => match(3, String, "ok"), MatchError);
     });
     it('lambda args', () => {
-        assert.equal(match(3, NUMBER, (x) => x), 3);
+        assert.equal(match(3, Number, (x) => x), 3);
         assert.equal(match([1, 2], [1, _], (x) => x), 2);
         assert.equal(match([1, 2, 3], [_, 2, 3], (x) => x), 1);
         assert.deepEqual(match([1, 2, 3], [_, _, 3], (a, b) => [a, b]), [1, 2]);
@@ -99,7 +98,7 @@ describe('match', () => {
     it('lambda cond', () => {
         function f(x) {
             return match(x,
-                STRING,         (x => `${x} is a string`),
+                String,         x => `${x} is a String`,
                 x => x > 3,     x => `${x} is > 3`,
                 x => x < 3,     x => `${x} is < 3`,
                 x => x === 3,   x => `${x} is = 3`);
@@ -107,8 +106,8 @@ describe('match', () => {
         assert.equal(f(3), "3 is = 3");
         assert.equal(f(2), "2 is < 3");
         assert.equal(f(4), "4 is > 3");
-        assert.equal(f("hello"), "hello is a string");
-        assert.equal(f("3"), "3 is a string");
+        assert.equal(f("hello"), "hello is a String");
+        assert.equal(f("3"), "3 is a String");
     });
     it('fibonacci', () => {
         function fib(n) {
@@ -181,9 +180,9 @@ describe('match', () => {
             return match(x,
                 null,       "null",
                 undefined,  "undefined",
-                NUMBER,     "number");
+                Number,     "Number");
         }
-        assert.equal(f(3), "number");
+        assert.equal(f(3), "Number");
         assert.equal(f(null), "null");
         let z;
         assert.equal(f(z), "undefined");
