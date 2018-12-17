@@ -7,7 +7,7 @@
 [![npm version](https://badge.fury.io/js/pampy.svg)](https://badge.fury.io/js/pampy)
 
 
-Pampy.js is pretty small (250 lines), reasonably fast, and often makes your code more readable, and easier to reason about. There is also a [Python version](https://github.com/santinic/pampy) of Pampy.
+Pampy.js is pretty small (250 lines, no dependencies), reasonably fast, and often makes your code more readable, and easier to reason about. There is also a [Python version](https://github.com/santinic/pampy) of Pampy.
 
 <kbd>
   <img src="https://github.com/santinic/pampy.js/raw/master/imgs/slide1.png" width="700">
