@@ -49,7 +49,7 @@ function lisp(exp) {
         Array,              (l) => l.map(lisp),
         _,                  (x) => x
     );
-
+}
 let plus = (a, b) => a + b;
 let minus = (a, b) => a - b;
 let reduce = (f, l) => l.reduce(f);
