@@ -127,16 +127,16 @@ match(x,
 
 ```javascript
 function fib(n) {
-    return matchPairs(
-      n,
-      [0, 0],
-      [1, 1],
-      [2, 1],
-      [3, 2],
-      [4, 3],
-      [_, x => fib(x - 1) + fib(x - 2)]
-    )
-  }
+  return matchPairs(
+    n,
+    [0, 0],
+    [1, 1],
+    [2, 1],
+    [3, 2],
+    [4, 3],
+    [_, x => fib(x - 1) + fib(x - 2)]
+  )
+}
 ```
 
 ## All the things you can match
