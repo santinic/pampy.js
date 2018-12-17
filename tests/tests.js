@@ -3,9 +3,8 @@
 let assert = require('chai').assert;
 let lodash = require('lodash');
 let fs = require('fs');
-let {matchArray, matchValue, matchDict, zipLongest, match, matchAll, _, HEAD, TAIL, REST,} = require('../lib/pampy');
+let {matchArray, matchValue, matchDict, zipLongest, match, matchAll, matchPairs, _, HEAD, TAIL, REST,} = require('../lib/pampy');
 let {PAD_VALUE, ANY, MatchError} = require('../lib/pampy');
-
 
 describe('matchValue', () => {
     it('values', () => {
@@ -62,6 +61,18 @@ describe('matchDict', () => {
         assert.deepEqual(matchDict({a: String, _: _}, {a: "1", b: 2}), [true, ["1", 'b', 2]]);
     });
 });
+
+describe('matchPairs', () => {
+    it('accepts [pattern, action] pairs using arrays', () => {
+      function fib(n) {
+        return matchPairs(n, [1, 1], [2, 1], [_, x => fib(x - 1) + fib(x - 2)])
+      }
+
+      assert.equal(fib(2), 1)
+      assert.equal(fib(7), 13)
+    })
+})
+
 describe('match', () => {
     it('bad args num', () => {
         assert.throws(() => match(3, 2), MatchError);
