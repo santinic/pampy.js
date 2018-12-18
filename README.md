@@ -153,7 +153,7 @@ function fib(n) {
 | `[1, 2, TAIL]` | A list that start with 1, 2 and ends with any sequence | `[1, 2, 3, 4]`| `[3, 4]` | `[1, 7, 7, 7]` |
 | `{type:'dog', age: _ }` | Any dict with `type: "dog"` and with an age | `{type:"dog", age: 3}` | `3` | `{type:"cat", age:2}` |
 | `{type:'dog', age: Number }` | Any dict with `type: "dog"` and with an numeric age | `{type:"dog", age: 3}` | `3` | `{type:"dog", age:2.3}` |
-| `x => x > 3` | Anything greather than 3 | `5` | `3` | `2` |
+| `x => x > 3` | Anything greater than 3 | `5` | `3` | `2` |
 | `null` | only `null` | `null` | nothing | any other value |
 | `undefined` | only `undefined` | `undefined` | nothing | any other value |
 
