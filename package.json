@@ -16,6 +16,7 @@
   },
   "files": [
     "/lib",
+    "/dist",
     "LICENSE",
     "README.md"
   ],
@@ -25,12 +26,14 @@
     "coveralls": "^3.0.2",
     "mocha": "^5.2.0",
     "mocha-lcov-reporter": "^1.3.0",
-    "nyc": "^13.1.0"
+    "nyc": "^13.1.0",
+    "lyo": "1.2.0"
   },
   "scripts": {
     "test": "mocha tests",
     "coverage": "node_modules/nyc/bin/nyc.js report npm test",
-    "coveralls": "node_modules/nyc/bin/nyc.js report --reporter=text-lcov npm test | coveralls"
+    "coveralls": "node_modules/nyc/bin/nyc.js report --reporter=text-lcov npm test | coveralls",
+    "prepublishOnly": "lyo"
   },
   "engines": {
     "node": ">=6.0.0"

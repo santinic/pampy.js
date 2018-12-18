@@ -60,4 +60,7 @@ typings/
 # next.js build output
 .next
 
+# browser-compatible version
+dist/
+
 .idea/
