@@ -7,7 +7,7 @@ let {matchArray, matchValue, matchDict, zipLongest, match, matchAll, matchPairs,
 let {PAD_VALUE, ANY, MatchError} = require('../lib/pampy');
 
 describe('matchValue', () => {
-    it('values', () => {
+    it('matches values', () => {
         assert.deepEqual(matchValue(3, 3), [true, []]);
         assert.deepEqual(matchValue("ok", "ok"), [true, []]);
         assert.deepEqual(matchValue("ok", 3), [false, []]);
@@ -17,11 +17,21 @@ describe('matchValue', () => {
         assert.deepEqual(matchValue(3.0, 3), [true, []]);
         assert.deepEqual(matchValue(_, 1), [true, [1]])
     });
-    it('types', () => {
+    it('matches String type', () => {
         assert.deepEqual(matchValue(String, "ok"), [true, ["ok"]]);
         assert.deepEqual(matchValue(String, 3), [false, []]);
+        assert.deepEqual(matchValue(String, false), [false, []]);
+    })
+    it('matches Number type', () => {
         assert.deepEqual(matchValue(Number, 3), [true, [3]]);
         assert.deepEqual(matchValue(Number, "ok"), [false, []]);
+        assert.deepEqual(matchValue(Number, false), [false, []]);
+    })
+    it('matches Boolean type', () => {
+        assert.deepEqual(matchValue(Boolean, true), [true, [true]]);
+        assert.deepEqual(matchValue(Boolean, false), [true, [false]]);
+        assert.deepEqual(matchValue(Boolean, "ok"), [false, []]);
+        assert.deepEqual(matchValue(Boolean, 1), [false, []]);
     });
 });
 describe('matchArray', () => {
