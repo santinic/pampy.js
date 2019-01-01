@@ -126,6 +126,8 @@ match(x,
 ## You can pass [pattern, action] array pairs to matchPairs for better Prettier formatting.
 
 ```javascript
+let { matchPairs, _ } = require("pampy");
+
 function fib(n) {
   return matchPairs(
     n,
