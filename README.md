@@ -67,13 +67,13 @@ let {match, _} = require("pampy");
 match(x,
     3,                "this matches the number 3",
 
-    Number,           "matches any javascript number",
+    Number,           "matches any JavaScript number",
 
-    [String, Number], (a, b) => "a typed list [a, b] that you can use in a function",
+    [String, Number], (a, b) => "a typed Array [a, b] that you can use in a function",
 
-    [1, 2, _],        "any list of 3 elements that begins with [1, 2]",
+    [1, 2, _],        "any Array of 3 elements that begins with [1, 2]",
 
-    {x: _},           "any dict with a key 'x' and any value associated",
+    {x: _},           "any Object with a key 'x' and any value associated",
 
     _,                "anything else"
 )
@@ -92,7 +92,7 @@ match(x, [_, TAIL],   (h, t) => [h, t]);    // => [1, [2, 3])
 
 ```
 
-## You can nest lists and tuples
+## You can nest Arrays
 
 ```javascript
 let {match, _, TAIL} = require("pampy");
@@ -102,7 +102,7 @@ x = [1, [2, 3], 4];
 match(x, [1, [_, 3], _], (a, b) => [1, [a, 3], b]);   // => [1, [2, 3], 4]
 ```
 
-## You can nest dicts. And you can use _ as key!
+## You can nest Objects. And you can use _ as key!
 
 ```javascript
 
@@ -126,6 +126,8 @@ match(x,
 ## You can pass [pattern, action] array pairs to matchPairs for better Prettier formatting.
 
 ```javascript
+let { matchPairs, _ } = require("pampy");
+
 function fib(n) {
   return matchPairs(
     n,
@@ -147,12 +149,12 @@ function fib(n) {
 | `Number` | Any javascript number | `2.35` | `2.35` | any other value |
 | `String` | Any javascript string | `"hello"` | `"hello"` | any other value |
 | `Array` | Any array object | `[1, 2]` | `[1, 2]` | any other value |
-| `_` | Any object |  | that value | |
+| `_` | Any value |  | that value | |
 | `ANY` | The same as `_` | | that value | |
-| `[1, 2, _]`  | A list that starts with 1, 2 and ends with any value | `[1, 2, 3]` | `3` | `[1, 2, 3, 4]` |
-| `[1, 2, TAIL]` | A list that start with 1, 2 and ends with any sequence | `[1, 2, 3, 4]`| `[3, 4]` | `[1, 7, 7, 7]` |
-| `{type:'dog', age: _ }` | Any dict with `type: "dog"` and with an age | `{type:"dog", age: 3}` | `3` | `{type:"cat", age:2}` |
-| `{type:'dog', age: Number }` | Any dict with `type: "dog"` and with an numeric age | `{type:"dog", age: 3}` | `3` | `{type:"dog", age:2.3}` |
+| `[1, 2, _]`  | An Array that starts with 1, 2 and ends with any value | `[1, 2, 3]` | `3` | `[1, 2, 3, 4]` |
+| `[1, 2, TAIL]` | An Array that start with 1, 2 and ends with any sequence | `[1, 2, 3, 4]`| `[3, 4]` | `[1, 7, 7, 7]` |
+| `{type:'dog', age: _ }` | Any Object with `type: "dog"` and with an age | `{type:"dog", age: 3}` | `3` | `{type:"cat", age:2}` |
+| `{type:'dog', age: Number }` | Any Object with `type: "dog"` and with an numeric age | `{type:"dog", age: 3}` | `3` | `{type:"dog", age:2.3}` |
 | `x => x > 3` | Anything greater than 3 | `5` | `3` | `2` |
 | `null` | only `null` | `null` | nothing | any other value |
 | `undefined` | only `undefined` | `undefined` | nothing | any other value |
