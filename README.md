@@ -161,3 +161,12 @@ function fib(n) {
 
 ## How to install
 ```npm install pampy```
+
+## Browser usage
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/pampy/dist/pampy.min.js"></script>
+<script>
+  pampy.match(input, pattern, action);
+</script>
+```
