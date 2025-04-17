@@ -1,8 +1,6 @@
 ![Pampy in Star Wars](https://github.com/santinic/pampy.js/raw/master/imgs/pampyjs.png "Pampy in Star Wars")
 
 # Pampy.js: Pattern Matching for JavaScript
-[![License MIT](https://go-shields.herokuapp.com/license-MIT-blue.png)]()
-[![Travis-CI Status](https://api.travis-ci.org/santinic/pampy.js.svg?branch=master)](https://travis-ci.org/santinic/pampy.js)
 [![Coverage Status](https://coveralls.io/repos/github/santinic/pampy.js/badge.svg?branch=master)](https://coveralls.io/github/santinic/pampy.js?branch=master)
 [![npm version](https://badge.fury.io/js/pampy.svg)](https://badge.fury.io/js/pampy)
 
